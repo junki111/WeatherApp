@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { SafeAreaView, Text, StyleSheet, Button, StatusBar } from 'react-native'
 
 const Counter = () => {
     const [ count, setCount ] = useState(0)
+
+    useEffect(() => {
+        console.log(`Count is now: ${count}`)
+    }, [count])
 
     return (
         <SafeAreaView style={styles.container}>

@@ -1,24 +1,57 @@
-import React from "react"
-import { SafeAreaView, Text, StyleSheet, ImageBackground, StatusBar, View } from "react-native"
-import IconText from "../components/IconText"
+import React from 'react'
+import {
+    SafeAreaView,
+    Text,
+    StyleSheet,
+    ImageBackground,
+    StatusBar,
+    View
+} from 'react-native'
+import IconText from '../components/IconText'
+import moment from 'moment'
 
-const City = () => {
-    const { container, image, text, populationWrapper, populationText, riseSetWrapper, riseSetText } = styles
+const City = ({ weatherData }) => {
+    const {
+        container,
+        image,
+        text,
+        populationWrapper,
+        populationText,
+        riseSetWrapper,
+        riseSetText
+    } = styles
 
     return (
         <SafeAreaView style={[container]}>
-            <ImageBackground 
+            <ImageBackground
                 source={require('../../assets/kuala-lumpur.jpg')}
                 style={image}
             >
-                <Text style={[text, {fontSize: 40}]}>Kuala Lumpur</Text>
-                <Text style={[text, {fontSize: 30}]}>Malaysia</Text>
+                <Text style={[text, { fontSize: 40 }]}>{weatherData.name}</Text>
+                <Text style={[text, { fontSize: 30 }]}>
+                    {weatherData.country}
+                </Text>
                 <View style={[populationWrapper, styles.rowLayout]}>
-                    <IconText iconName='user' iconColor='red' bodyText='80000' bodyTextStyles={populationText}/>
+                    <IconText
+                        iconName="user"
+                        iconColor="red"
+                        bodyText={`Population: ${weatherData.population}`}
+                        bodyTextStyles={populationText}
+                    />
                 </View>
                 <View style={[riseSetWrapper, styles.rowLayout]}>
-                    <IconText iconName='sunrise' iconColor='white' bodyText='10:46:58am' bodyTextStyles={riseSetText} />
-                    <IconText iconName='sunset' iconColor='white' bodyText='17:28:16pm' bodyTextStyles={riseSetText} />
+                    <IconText
+                        iconName="sunrise"
+                        iconColor="white"
+                        bodyText={moment(weatherData.sunrise).format('h:mm:ss a')}
+                        bodyTextStyles={riseSetText}
+                    />
+                    <IconText
+                        iconName="sunset"
+                        iconColor="white"
+                        bodyText={moment(weatherData.sunset).format('h:mm:ss a')}
+                        bodyTextStyles={riseSetText}
+                    />
                 </View>
             </ImageBackground>
         </SafeAreaView>
@@ -57,7 +90,7 @@ const styles = StyleSheet.create({
     },
     rowLayout: {
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'center'
     }
 })
 
